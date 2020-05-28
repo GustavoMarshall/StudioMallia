@@ -1,0 +1,53 @@
+import 'package:studiomallia/models/clientes.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:studiomallia/database/app_database.dart';
+
+class ClientesDao {
+
+  static const String tableSQL = 'CREATE TABLE clientes('
+      'id INTEGER PRIMARY KEY, '
+      'nome TEXT, '
+      'cpf TEXT,'
+      'datanascimento TEXT,'
+      'telefone TEXT,'
+      'rua TEXT,'
+      'cidade TEXT,'
+      'estado TEXT)';
+
+  Future<int> save(Clientes clientes) async {
+    final Database db = await getDatabase(tableSQL);
+    Map<String, dynamic> contactMap = _toMap(clientes);
+    return db.insert('clientes', contactMap);
+  }
+
+  Map<String, dynamic> _toMap(Clientes clientes) {
+    final Map<String, dynamic> clientesMap = Map();
+    clientesMap['nome'] = clientes.nome;
+    clientesMap['cpf'] = clientes.cpf;
+    clientesMap['datanascimento'] = clientes.datanascimento;
+    clientesMap['telefone'] = clientes.telefone;
+    clientesMap['rua'] = clientes.rua;
+    clientesMap['cidade'] = clientes.cidade;
+    clientesMap['estado'] = clientes.estado;
+
+    return clientesMap;
+  }
+
+  Future<List<Clientes>> findAll() async {
+    final Database db = await getDatabase(tableSQL);
+    final List<Map<String, dynamic>> result = await db.query('clientes');
+    List<Clientes> contacts = _toList(result);
+
+    return contacts;
+  }
+
+  List<Clientes> _toList(List<Map<String, dynamic>> result) {
+    final List<Clientes> clientes = List();
+    for (Map<String, dynamic> row in result) {
+      final Clientes clientes =
+      Clientes(row['id'], row['nome'] , row['cpf'], row['datanascimento'], row['telefone'], row['rua'], row['cidade'], row['estado']);
+      clientes.add(clientes);
+    }
+    return clientes;
+  }
+}
