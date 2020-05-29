@@ -89,7 +89,7 @@ class __ClientesItemState extends State<_ClientesItem> {
           style: TextStyle(fontSize: 24),
         ),
         subtitle: Text(
-          '${widget.clientes.cpf}''${widget.clientes.datanascimento}''${widget.clientes.telefone}''${widget.clientes.rua}''${widget.clientes.cidade}''${widget.clientes.estado}',
+          'CPF:${widget.clientes.cpf} | ''Data de Nascimento:${widget.clientes.datanascimento} | ''Telefone:${widget.clientes.telefone} | \n''Rua/Av:${widget.clientes.rua} | ''Cidade:${widget.clientes.cidade} | ''Estado:${widget.clientes.estado} | ',
           style: TextStyle(fontSize: 15),
         ),
 //       subtitle: Text(
