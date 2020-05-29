@@ -44,9 +44,9 @@ class ClientesDao {
   List<Clientes> _toList(List<Map<String, dynamic>> result) {
     final List<Clientes> clientes = List();
     for (Map<String, dynamic> row in result) {
-      final Clientes clientes =
+      final Clientes cliente =
       Clientes(row['id'], row['nome'] , row['cpf'], row['datanascimento'], row['telefone'], row['rua'], row['cidade'], row['estado']);
-      clientes.add(clientes);
+      clientes.add(cliente);
     }
     return clientes;
   }

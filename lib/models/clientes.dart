@@ -16,4 +16,4 @@ class Clientes {
     // TODO: implement toString
     return 'Cliente{nome: $nome, cpf: $cpf, datanascimento: $datanascimento, telefone : $telefone, rua: $rua, cidade: $cidade, estado:$estado';
   }
-
+}
