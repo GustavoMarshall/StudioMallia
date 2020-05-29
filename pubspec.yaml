@@ -28,6 +28,9 @@ dependencies:
 
   path_provider: ^1.4.5
   google_fonts: ^0.6.2
+  direct_select: ^1.0.2+1
+  expandable: ^4.1.4
+  date_format: ^1.0.4
 
 dev_dependencies:
   flutter_test:

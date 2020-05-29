@@ -1,3 +1,5 @@
+import 'package:flutter/painting.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:studiomallia/database/app_database.dart';
 import 'package:studiomallia/database/dao/clientes_dao.dart';
 import 'package:studiomallia/main.dart';
@@ -12,7 +14,6 @@ class TelaCliente extends StatefulWidget {
 }
 
 class _TelaClienteListState extends State<TelaCliente> {
-
   final ClientesDao _dao = ClientesDao();
 
   @override
@@ -20,48 +21,50 @@ class _TelaClienteListState extends State<TelaCliente> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Clientes'),
+        backgroundColor: Colors.pink,
       ),
       body: SafeArea(
           child: FutureBuilder<List<Clientes>>(
-            initialData: List(),
-            future: _dao.findAll(),
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                  break;
-                case ConnectionState.waiting:
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        CircularProgressIndicator(),
-                        Text('Carregando')
-                      ],
-                    ),
-                  );
-                  break;
-                case ConnectionState.active:
-                  break;
-                case ConnectionState.done:
-                  final List<Clientes> cliente = snapshot.data;
-                  return ListView.builder(
-                    itemBuilder: (context, index) {
-                      final Clientes clientes = cliente[index];
-                      return _ClientesItem(clientes: clientes);
-                    },
-                    itemCount: cliente.length,
-                  );
-                  break;
-              }
+        initialData: List(),
+        future: _dao.findAll(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              break;
+            case ConnectionState.waiting:
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    CircularProgressIndicator(),
+                    Text('Carregando')
+                  ],
+                ),
+              );
+              break;
+            case ConnectionState.active:
+              break;
+            case ConnectionState.done:
+              final List<Clientes> cliente = snapshot.data;
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  final Clientes clientes = cliente[index];
+                  return _ClientesItem(clientes: clientes);
+                },
+                itemCount: cliente.length,
+              );
+              break;
+          }
 
-              return Container();
-            },
-          )),
+          return Container();
+        },
+      )),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.pink,
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Cadastrar()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Cadastrar()));
         },
         child: Icon(Icons.add),
       ),
@@ -82,37 +85,37 @@ class __ClientesItemState extends State<_ClientesItem> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Card(
-      child: ListTile(
-        title: Text(
-          widget.clientes.nome,
-          style: TextStyle(fontSize: 24),
-        ),
-        subtitle: Text(
-          'CPF:${widget.clientes.cpf} | ''Data de Nascimento:${widget.clientes.datanascimento} | ''Telefone:${widget.clientes.telefone} | \n''Rua/Av:${widget.clientes.rua} | ''Cidade:${widget.clientes.cidade} | ''Estado:${widget.clientes.estado} | ',
-          style: TextStyle(fontSize: 15),
-        ),
-//       subtitle: Text(
-//     '${widget.clientes.datanascimento}',
-//        style: TextStyle(fontSize: 15),
-//        ),
-//        subtitle: Text(
-//         '${widget.clientes.telefone}',
-//         style: TextStyle(fontSize: 15),
-//       ),
-//       subtitle: Text(
-//          '${widget.clientes.rua}',
-//         style: TextStyle(fontSize: 15),
-//        ),
-//        subtitle: Text(
-//          '${widget.clientes.cidade}',
-//         style: TextStyle(fontSize: 15),
-//       ),
-//        subtitle: Text(
-//         '${widget.clientes.estado}',
-//         style: TextStyle(fontSize: 15),
-//        ),
+    return ExpansionTile(
+
+      title: Text(
+        widget.clientes.nome,
+        style: GoogleFonts.ptSans(fontSize: 24, fontWeight: FontWeight.bold),
       ),
+      subtitle: Text('Telefone: ${widget.clientes.telefone}'),
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(left: 16),
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'CPF: ${widget.clientes.cpf}',
+                  textAlign: TextAlign.left,
+                ),
+                Text('Data de Nascimento: ${widget.clientes.datanascimento}'),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Text('Endereço: Rua/Av: ${widget.clientes.rua} - '
+                      'Cidade: ${widget.clientes.cidade} - '
+                      'Estado: ${widget.clientes.estado}'),
+                )
+              ],
+            ),
+          ),
+        )
+      ],
     );
   }
 }
