@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class consultar extends StatelessWidget{
+class Consultar extends StatelessWidget{
 
   TextStyle style = TextStyle(
       fontFamily: 'Montserrat', fontSize: 20.0, fontWeight: FontWeight.bold);

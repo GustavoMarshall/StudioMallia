@@ -32,6 +32,7 @@ class _ClientesFormState extends State<Cadastrar> {
           title: Text('Cadastrar Cliente'),
           backgroundColor: Colors.pink,
         ),
+
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -176,35 +177,59 @@ class _ClientesFormState extends State<Cadastrar> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: SizedBox(
-                      width: double.maxFinite,
-                      child: RaisedButton(
-                        color: Color.fromRGBO(222, 72, 111, 1),
-                        child: Text('Create'),
-                        onPressed: () {
-                          final String name = _nomeController.text;
-                          final String cpf = _cpfController.text;
-                          final String datanascimento =
-                              _datanascimentoController.text;
-                          final String telefone = _telefoneController.text;
-                          final String rua = _ruaController.text;
-                          final String cidade = _cidadeController.text;
-                          final String estado = __estadoController.text;
 
-                          final Clientes newClientes = Clientes(0, name, cpf,
-                              datanascimento, telefone, rua, cidade, estado);
-                          _dao
-                              .save(newClientes)
-                              .then((id) => Navigator.pop(context));
-                        },
-                      )),
-                )
+
+//                Padding(
+//                  padding: const EdgeInsets.only(top: 16.0),
+//                  child: SizedBox(
+//                      width: double.maxFinite,
+//                      child: RaisedButton(
+//                        color: Color.fromRGBO(222, 72, 111, 1),
+//                        child: Text('Create'),
+//                        onPressed: () {
+//                          final String name = _nomeController.text;
+//                          final String cpf = _cpfController.text;
+//                          final String datanascimento =
+//                              _datanascimentoController.text;
+//                          final String telefone = _telefoneController.text;
+//                          final String rua = _ruaController.text;
+//                          final String cidade = _cidadeController.text;
+//                          final String estado = __estadoController.text;
+//
+//                          final Clientes newClientes = Clientes(0, name, cpf,
+//                              datanascimento, telefone, rua, cidade, estado);
+//                          _dao.save(newClientes).then((id) => Navigator.pop(context));
+//                        },
+//                      )),
+//                )
+
+
               ],
             ),
           ),
-        ));
+        ),
+
+        floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.pink,
+        onPressed: ( ){
+      final String name = _nomeController.text;
+      final String cpf = _cpfController.text;
+      final String datanascimento = _datanascimentoController.text;
+      final String telefone = _telefoneController.text;
+      final String rua = _ruaController.text;
+      final String cidade = _cidadeController.text;
+      final String estado = __estadoController.text;
+
+      final Clientes newClientes = Clientes(0, name, cpf,
+          datanascimento, telefone, rua, cidade, estado);
+      _dao.save(newClientes).then((id) => Navigator.pop(context));
+    },
+
+    child: Icon(Icons.save),
+
+    ),
+
+    );
   }
 }
 

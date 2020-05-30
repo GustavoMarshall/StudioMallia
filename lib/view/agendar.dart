@@ -1,11 +1,14 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:studiomallia/view/consultar.dart';
+import 'package:studiomallia/models/agendamento.dart';
 
 class agendar extends StatelessWidget{
   TextEditingController _clieController = TextEditingController();
   TextEditingController _horaController = TextEditingController();
   TextEditingController _dataController = TextEditingController();
+  TextEditingController _servicoController = TextEditingController();
   @override
   Widget build(BuildContext context) {
         TextStyle style = TextStyle(
@@ -18,12 +21,7 @@ class agendar extends StatelessWidget{
       appBar: AppBar(
         title: Text("Agendar Cliente"),backgroundColor: Colors.pink,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
 
-        },
-        child: Icon(Icons.save),
-      ),
       body: Center(
         child: Container(
           padding: EdgeInsets.all(40),
@@ -83,6 +81,7 @@ class agendar extends StatelessWidget{
 
 
               TextField(
+                controller: _servicoController,
                 obscureText: false,
                 style: style,
                 decoration: InputDecoration(
@@ -92,53 +91,27 @@ class agendar extends StatelessWidget{
                   )
                 ),
               ),
-
-//              Padding(
-//                padding: const EdgeInsets.only(top: 60, bottom: 8, right: 180, left: 180),
-//                child: ButtonTheme(
-//                  minWidth: MediaQuery.of(context).size.width,
-//                  padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-//                  child: RaisedButton(
-//                    color: Color(0xff4caf50),
-//                    child: Text(
-//                      "Salvar",
-//                      textAlign: TextAlign.center,
-//                      style: style.copyWith(
-//                        color: Colors.white, fontWeight: FontWeight.bold
-//                      )
-//                    ),
-//
-//                    onPressed: (){
-//                      agendarAlerta(context);
-//
-//                    },shape: RoundedRectangleBorder(
-//                    borderRadius: BorderRadius.circular((40))
-//
-//                  )
-//
-//                  ),
-//
-//                ),
-//              )
-
-
             ],
-
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.pink,
+        onPressed: (){
+          final String clienteAgenda = _clieController.text;
+          final String dataAgenda = _dataController.text;
+          final String horaAgenda = _horaController.text;
+          final String servicoAgenda = _servicoController.text;
+
+          final Agendamento newAgendamento = Agendamento(0, clienteAgenda ,dataAgenda,
+          horaAgenda , servicoAgenda );
+          _dao.save(newAgendamento).then((id) => Navigator.pop(context));
+
+        },
+      ) ,
     );
   }
 
-
-    void agendarAlerta(BuildContext context) {
-      var alertDialog = AlertDialog(
-        title: Text("${_clieController.text} foi agendada com sucesso0!"),
-
-      );
-      showDialog(
-          context: context, builder: (BuildContext context) => alertDialog);
-    }
 
 
 }
