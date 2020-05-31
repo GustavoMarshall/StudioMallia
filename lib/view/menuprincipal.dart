@@ -69,7 +69,7 @@ class menuprincipal extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (BuildContext context) => agendar()));
+                                    builder: (BuildContext context) => Agendar()));
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -163,7 +163,7 @@ class menuprincipal extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (BuildContext context) => consultar()));
+                                    builder: (BuildContext context) => Consultar()));
                           },
                           child: Container(
                             decoration: BoxDecoration(
