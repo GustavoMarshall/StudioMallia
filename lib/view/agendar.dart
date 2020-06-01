@@ -2,10 +2,14 @@
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:studiomallia/database/dao/agendamentos_dao.dart';
+import 'package:studiomallia/database/dao/clientes_dao.dart';
 import 'package:studiomallia/models/agendamentos.dart';
+import 'package:studiomallia/models/clientes.dart';
 import 'package:studiomallia/view/consultar.dart';
 import 'package:studiomallia/models/agendamentos.dart';
 import 'package:studiomallia/view/menuprincipal.dart';
+import 'package:studiomallia/view/selecionar.dart';
+import 'package:studiomallia/view/telaCliente.dart';
 
 class Agendar extends StatefulWidget {
   @override
@@ -13,12 +17,12 @@ class Agendar extends StatefulWidget {
 }
 
 class _AgendaFormState extends State<Agendar> {
-
   TextEditingController _clieController = TextEditingController();
   TextEditingController _horaController = TextEditingController();
   TextEditingController _dataController = TextEditingController();
   TextEditingController _servicoController = TextEditingController();
   String agendamento_label = 'Data de Agendamento';
+  String nomecliente_label = 'Selecione um cliente';
   final AgendamentosDao _dao = AgendamentosDao();
 
   @override
@@ -39,19 +43,35 @@ class _AgendaFormState extends State<Agendar> {
           child: ListView(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(top: 8, bottom: 8),
-                child: TextField(
-                    controller: _clieController,
-                    obscureText: false,
-                    style: style,
-                    decoration: InputDecoration(
-                      hintText: 'Cliente',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular((40)),
-                      ),
-                    )
-
-                ),
+                  padding: const EdgeInsets.only(top: 8, bottom: 8),
+                  child: OutlineButton(
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0)),
+                    borderSide: BorderSide(
+                      color: Colors.grey,
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(8.0, 16, 8.0, 16),
+                          child: Text(nomecliente_label, style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey[600]
+                          ),),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(8.0, 16, 8.0, 16),
+                          child: Icon(
+                            Icons.people, color: Colors.grey[600],),
+                        )
+                      ],
+                    ),
+                    onPressed: () async {
+                      _navigateAndDisplaySelection(context);
+                    },
+                  )
               ),
               Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
@@ -148,6 +168,23 @@ class _AgendaFormState extends State<Agendar> {
         child: Icon(Icons.save),
       ),
     );
+  }
+
+  _navigateAndDisplaySelection(BuildContext context) async {
+    // Navigator.push returns a Future that completes after calling
+    // Navigator.pop on the Selection Screen.
+    final result = await Navigator.push(
+      context,
+      // Create the SelectionScreen in the next step.
+      MaterialPageRoute(builder: (context) => SelecionarCliente()),
+
+    );
+    setState(() {
+      if(result != null) {
+        nomecliente_label = result;
+        _clieController.text = result;
+      }
+    });
   }
 
 }

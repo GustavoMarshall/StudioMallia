@@ -5,17 +5,17 @@ import 'package:studiomallia/database/app_database.dart';
 class ClientesDao {
 
   static const String tableSQL = 'CREATE TABLE clientes('
-      'id INTEGER PRIMARY KEY, '
-      'nome TEXT, '
-      'cpf TEXT,'
-      'datanascimento TEXT,'
-      'telefone TEXT,'
-      'rua TEXT,'
-      'cidade TEXT,'
-      'estado TEXT)';
+  'id INTEGER PRIMARY KEY, '
+  'nome TEXT, '
+  'cpf TEXT,'
+  'datanascimento TEXT,'
+  'telefone TEXT,'
+  'rua TEXT,'
+  'cidade TEXT,'
+  'estado TEXT)';
 
   Future<int> save(Clientes clientes) async {
-    final Database db = await getDatabase(tableSQL);
+    final Database db = await getDatabase();
     Map<String, dynamic> contactMap = _toMap(clientes);
     return db.insert('clientes', contactMap);
   }
@@ -34,10 +34,10 @@ class ClientesDao {
   }
 
   Future<List<Clientes>> findAll() async {
-    final Database db = await getDatabase(tableSQL);
+    final Database db = await getDatabase();
     final List<Map<String, dynamic>> result = await db.query('clientes');
     List<Clientes> contacts = _toList(result);
-
+    print(contacts);
     return contacts;
   }
 

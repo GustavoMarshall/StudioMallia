@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:studiomallia/view/menuprincipal.dart';
+
+import 'database/app_database.dart';
 
 void main() => runApp(MyApp());
 
