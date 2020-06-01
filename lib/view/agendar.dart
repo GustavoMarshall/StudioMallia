@@ -1,9 +1,10 @@
 
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
-import 'package:studiomallia/database/dao/agendamento_dao.dart';
+import 'package:studiomallia/database/dao/agendamentos_dao.dart';
+import 'package:studiomallia/models/agendamentos.dart';
 import 'package:studiomallia/view/consultar.dart';
-import 'package:studiomallia/models/agendamento.dart';
+import 'package:studiomallia/models/agendamentos.dart';
 import 'package:studiomallia/view/menuprincipal.dart';
 
 class Agendar extends StatefulWidget {
@@ -18,7 +19,7 @@ class _AgendaFormState extends State<Agendar> {
   TextEditingController _dataController = TextEditingController();
   TextEditingController _servicoController = TextEditingController();
   String agendamento_label = 'Data de Agendamento';
-  final AgendamentoDao _dao = AgendamentoDao();
+  final AgendamentosDao _dao = AgendamentosDao();
 
   @override
   Widget build(BuildContext context) {
@@ -140,11 +141,9 @@ class _AgendaFormState extends State<Agendar> {
           final String horaAg = _horaController.text;
           final String servicoAg = _servicoController.text;
 
-          final Agendamento newAgendamento = Agendamento(0, clienteAg, dataAg,
+          final Agendamentos newAgendamento = Agendamentos(0, clienteAg, dataAg,
               horaAg, servicoAg);
-          _dao.save(newAgendamento).then((id) => Navigator.push(context,
-              MaterialPageRoute(
-               builder: (BuildContext context) => menuprincipal())));
+          _dao.save(newAgendamento).then((id) => Navigator.pop(context));
         },
         child: Icon(Icons.save),
       ),

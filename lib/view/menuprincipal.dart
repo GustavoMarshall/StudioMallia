@@ -69,7 +69,7 @@ class menuprincipal extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (BuildContext context) => Agendar()));
+                                    builder: (BuildContext context) => Consultar()));
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -89,7 +89,7 @@ class menuprincipal extends StatelessWidget {
                                   color: Color.fromRGBO(222, 72, 111, 1),
                                 ),
                                 Text(
-                                  'Agendar',
+                                  'Agendamentos',
                                   style: GoogleFonts.ptSans(
                                       color: Color.fromRGBO(222, 72, 111, 1),
                                       fontSize: 24,
@@ -153,48 +153,48 @@ class menuprincipal extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        width: size.width / 2,
-                        height: size.height / 4,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) => Consultar()));
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Color.fromRGBO(255, 192, 203, 1),
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    topRight: Radius.circular(20),
-                                    bottomLeft: Radius.circular(20),
-                                    bottomRight: Radius.circular(20))),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(
-                                  Icons.list,
-                                  size: 64,
-                                  color: Color.fromRGBO(222, 72, 111, 1),
-                                ),
-                                Text(
-                                  'Consultar',
-                                  style: GoogleFonts.ptSans(
-                                      color: Color.fromRGBO(222, 72, 111, 1),
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+//                    Padding(
+//                      padding: const EdgeInsets.all(8.0),
+//                      child: SizedBox(
+//                        width: size.width / 2,
+//                        height: size.height / 4,
+//                        child: InkWell(
+//                          onTap: () {
+//                            Navigator.push(
+//                                context,
+//                                MaterialPageRoute(
+//                                    builder: (BuildContext context) => Consultar()));
+//                          },
+//                          child: Container(
+//                            decoration: BoxDecoration(
+//                                color: Color.fromRGBO(255, 192, 203, 1),
+//                                borderRadius: BorderRadius.only(
+//                                    topLeft: Radius.circular(20),
+//                                    topRight: Radius.circular(20),
+//                                    bottomLeft: Radius.circular(20),
+//                                    bottomRight: Radius.circular(20))),
+//                            child: Column(
+//                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                              crossAxisAlignment: CrossAxisAlignment.center,
+//                              children: <Widget>[
+//                                Icon(
+//                                  Icons.list,
+//                                  size: 64,
+//                                  color: Color.fromRGBO(222, 72, 111, 1),
+//                                ),
+//                                Text(
+//                                  'Consultar',
+//                                  style: GoogleFonts.ptSans(
+//                                      color: Color.fromRGBO(222, 72, 111, 1),
+//                                      fontSize: 24,
+//                                      fontWeight: FontWeight.bold),
+//                                )
+//                              ],
+//                            ),
+//                          ),
+//                        ),
+//                      ),
+//                    ),
                     Padding(
                       padding: const EdgeInsets.only(right: 8),
                       child: SizedBox(
