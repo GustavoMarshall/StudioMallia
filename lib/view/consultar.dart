@@ -91,7 +91,9 @@ class __AgendaItemState extends State<_AgendaItem> {
         widget.agendamentos.clienteAg,
         style: GoogleFonts.ptSans(fontSize: 24, fontWeight: FontWeight.bold),
       ),
-      subtitle: Text('Data agendada: ${widget.agendamentos.dataAg} '' Horario: ${widget.agendamentos.horaAg} '' Serviço: ${widget.agendamentos.servicoAg} '),
+      subtitle: Text('Data agendada: ${widget.agendamentos.dataAg} \n'
+          'Horario: ${widget.agendamentos.horaAg} \n'
+          'Serviço: ${widget.agendamentos.servicoAg} \n'),
 
     );
   }
