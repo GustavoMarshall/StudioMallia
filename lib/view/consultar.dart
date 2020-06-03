@@ -24,6 +24,7 @@ class _ConsultarListState extends State<Consultar> {
         backgroundColor: Colors.pink,
       ),
       body: SafeArea(
+
           child: FutureBuilder<List<Agendamentos>>(
             initialData: List(),
             future: _dao.findAll(),

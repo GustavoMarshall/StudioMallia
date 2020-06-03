@@ -10,6 +10,7 @@ import 'package:studiomallia/models/agendamentos.dart';
 import 'package:studiomallia/view/menuprincipal.dart';
 import 'package:studiomallia/view/selecionar.dart';
 import 'package:studiomallia/view/telaCliente.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 class Agendar extends StatefulWidget {
   @override
@@ -23,12 +24,15 @@ class _AgendaFormState extends State<Agendar> {
   TextEditingController _servicoController = TextEditingController();
   String agendamento_label = 'Data de Agendamento';
   String nomecliente_label = 'Selecione um cliente';
+  String horario_label = 'Horário';
+  String servico_label = 'Serviço';
   final AgendamentosDao _dao = AgendamentosDao();
+  var controller = new MaskedTextController(mask: '00:00');
 
   @override
   Widget build(BuildContext context) {
     TextStyle style = TextStyle(
-        fontFamily: 'Montserrat', fontSize: 20.0, fontWeight: FontWeight.bold);
+        fontFamily: 'Montserrat', fontSize: 20.0, fontWeight: FontWeight.w500);
 
 
     return Scaffold(
@@ -122,17 +126,16 @@ class _AgendaFormState extends State<Agendar> {
               Padding(
                 padding: const EdgeInsets.only(top: 8, bottom: 8),
                 child: TextField(
-                    controller: _horaController,
-                    keyboardType: TextInputType.number,
-                    obscureText: false,
-                    style: style,
-                    decoration: InputDecoration(
-                        hintText: 'Horário',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular((40)),
+                    controller: controller,
+                  style: style,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                      hintText: 'Horário',
+                      border: OutlineInputBorder(
 
-                        )
-                    )
+                          borderRadius: BorderRadius.circular((40))
+                      )
+                  ),
 
                 ),
               ),
@@ -158,7 +161,7 @@ class _AgendaFormState extends State<Agendar> {
         onPressed: () {
           final String clienteAg = _clieController.text;
           final String dataAg = _dataController.text;
-          final String horaAg = _horaController.text;
+          final String horaAg = controller.text;
           final String servicoAg = _servicoController.text;
 
           final Agendamentos newAgendamento = Agendamentos(0, clienteAg, dataAg,

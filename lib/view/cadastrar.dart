@@ -5,6 +5,7 @@ import 'package:studiomallia/database/dao/clientes_dao.dart';
 import 'package:studiomallia/main.dart';
 import 'package:studiomallia/models/clientes.dart';
 import 'package:studiomallia/view/menuprincipal.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 class Cadastrar extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class Cadastrar extends StatefulWidget {
 
 class _ClientesFormState extends State<Cadastrar> {
   TextStyle style = TextStyle(
-      fontFamily: 'Montserrat', fontSize: 20.0, fontWeight: FontWeight.bold);
+      fontFamily: 'Montserrat', fontSize: 20.0, fontWeight: FontWeight.w500);
   TextEditingController _nomeController = TextEditingController();
   TextEditingController _cpfController = TextEditingController();
   TextEditingController _datanascimentoController = TextEditingController();
@@ -22,7 +23,8 @@ class _ClientesFormState extends State<Cadastrar> {
   TextEditingController _cidadeController = TextEditingController();
   TextEditingController __estadoController = TextEditingController();
   String birth_label = 'Data de Nascimento';
-
+  var teleFormated = new MaskedTextController(mask: '(00)00000-0000');
+  var cpfFormated = new MaskedTextController(mask: '000.000.000-00');
   final ClientesDao _dao = ClientesDao();
 
   @override
@@ -63,7 +65,7 @@ class _ClientesFormState extends State<Cadastrar> {
                 Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
                   child: TextField(
-                    controller: _cpfController,
+                    controller: cpfFormated,
                     keyboardType: TextInputType.number,
                     obscureText: false,
                     style: style,
@@ -116,7 +118,7 @@ class _ClientesFormState extends State<Cadastrar> {
                 Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
                   child: TextField(
-                    controller: _telefoneController,
+                    controller: teleFormated,
                     keyboardType: TextInputType.number,
                     obscureText: false,
                     style: style,
