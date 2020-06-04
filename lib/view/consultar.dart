@@ -22,6 +22,8 @@ class _ConsultarListState extends State<Consultar> {
       appBar: AppBar(
         title: Text('Agendamentos'),
         backgroundColor: Colors.pink,
+
+
       ),
       body: SafeArea(
 
@@ -95,6 +97,8 @@ class __AgendaItemState extends State<_AgendaItem> {
       subtitle: Text('Data agendada: ${widget.agendamentos.dataAg} \n'
           'Horario: ${widget.agendamentos.horaAg} \n'
           'Serviço: ${widget.agendamentos.servicoAg} \n'),
+
+
 
     );
   }

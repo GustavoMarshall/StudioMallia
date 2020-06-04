@@ -112,6 +112,8 @@ class _ClientesFormState extends State<Cadastrar> {
                       });
 
                       _datanascimentoController.text = data_formatada;
+
+
                     },
                   )
                 ),
@@ -188,9 +190,9 @@ class _ClientesFormState extends State<Cadastrar> {
         backgroundColor: Colors.pink,
         onPressed: ( ){
       final String name = _nomeController.text;
-      final String cpf = _cpfController.text;
+      final String cpf = cpfFormated.text;
       final String datanascimento = _datanascimentoController.text;
-      final String telefone = _telefoneController.text;
+      final String telefone = teleFormated.text;
       final String rua = _ruaController.text;
       final String cidade = _cidadeController.text;
       final String estado = __estadoController.text;

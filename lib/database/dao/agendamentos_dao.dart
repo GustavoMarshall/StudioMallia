@@ -45,4 +45,12 @@ class AgendamentosDao {
     }
     return agendamentos;
   }
-}
+
+  Future<List<Map<String, dynamic>>> getAgendaData() async {
+    final ret = await db.rawQuery('SELECT * FROM agendamentos WHERE dataagendamento = ? ORDER BY horario asc;');
+    return ret;
+  }
+
+
+
+  }
