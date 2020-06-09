@@ -1,3 +1,4 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:studiomallia/database/app_database.dart';
@@ -15,6 +16,7 @@ class Consultar extends StatefulWidget {
 
 class _ConsultarListState extends State<Consultar> {
   final AgendamentosDao _dao = AgendamentosDao();
+  String agendamento_label = 'Data de Agendamento';
 
   @override
   Widget build(BuildContext context) {
@@ -22,47 +24,56 @@ class _ConsultarListState extends State<Consultar> {
       appBar: AppBar(
         title: Text('Agendamentos'),
         backgroundColor: Colors.pink,
-
-
       ),
       body: SafeArea(
-
           child: FutureBuilder<List<Agendamentos>>(
-            initialData: List(),
-            future: _dao.findAll(),
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                  break;
-                case ConnectionState.waiting:
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        CircularProgressIndicator(),
-                        Text('Carregando')
-                      ],
-                    ),
-                  );
-                  break;
-                case ConnectionState.active:
-                  break;
-                case ConnectionState.done:
-                  final List<Agendamentos> agendamento = snapshot.data;
-                  return ListView.builder(
-                    itemBuilder: (context, index) {
-                      final Agendamentos agendamentos = agendamento[index];
-                      return _AgendaItem(agendamentos: agendamentos);
-                    },
-                    itemCount: agendamento.length,
-                  );
-                  break;
-              }
-
-              return Container();
-            },
-          )),
+        initialData: List(),
+        future: _dao.findAll(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              break;
+            case ConnectionState.waiting:
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    CircularProgressIndicator(),
+                    Text('Carregando')
+                  ],
+                ),
+              );
+              break;
+            case ConnectionState.active:
+              break;
+            case ConnectionState.done:
+              List<Agendamentos> agendamento = snapshot.data;
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  Agendamentos agendamentos = agendamento[index];
+                  return index == 0
+                      ? Column(
+                          children: <Widget>[
+                            RaisedButton(
+                              child: Text("Ordenar"),
+                              onPressed: () {
+                                agendamento.sort((a, b) => a.dataAg .compareTo(b.dataAg));
+                                print(agendamento.toString());
+                              },
+                            ),
+                            _AgendaItem(agendamentos: agendamentos)
+                          ],
+                        )
+                      : _AgendaItem(agendamentos: agendamentos);
+                },
+                itemCount: agendamento.length,
+              );
+              break;
+          }
+          return Container();
+        },
+      )),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.pink,
         onPressed: () {
@@ -89,7 +100,6 @@ class __AgendaItemState extends State<_AgendaItem> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return ExpansionTile(
-
       title: Text(
         widget.agendamentos.clienteAg,
         style: GoogleFonts.ptSans(fontSize: 24, fontWeight: FontWeight.bold),
@@ -97,21 +107,6 @@ class __AgendaItemState extends State<_AgendaItem> {
       subtitle: Text('Data agendada: ${widget.agendamentos.dataAg} \n'
           'Horario: ${widget.agendamentos.horaAg} \n'
           'Serviço: ${widget.agendamentos.servicoAg} \n'),
-
-
-
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-

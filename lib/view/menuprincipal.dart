@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:studiomallia/view/cadastrar.dart';
 import 'package:studiomallia/view/agendar.dart';
-import 'package:studiomallia/view/consultar.dart';
+import 'package:studiomallia/view/agendamentos_page.dart';
 import 'package:studiomallia/main.dart';
 import 'package:studiomallia/view/telaCliente.dart';
 

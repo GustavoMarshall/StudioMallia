@@ -1,11 +1,10 @@
-
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:studiomallia/database/dao/agendamentos_dao.dart';
 import 'package:studiomallia/database/dao/clientes_dao.dart';
 import 'package:studiomallia/models/agendamentos.dart';
 import 'package:studiomallia/models/clientes.dart';
-import 'package:studiomallia/view/consultar.dart';
+import 'package:studiomallia/view/agendamentos_page.dart';
 import 'package:studiomallia/models/agendamentos.dart';
 import 'package:studiomallia/view/menuprincipal.dart';
 import 'package:studiomallia/view/selecionar.dart';
@@ -34,13 +33,12 @@ class _AgendaFormState extends State<Agendar> {
     TextStyle style = TextStyle(
         fontFamily: 'Montserrat', fontSize: 20.0, fontWeight: FontWeight.w500);
 
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text("Agendar Cliente"), backgroundColor: Colors.pink,
+        title: Text("Agendar Cliente"),
+        backgroundColor: Colors.pink,
       ),
-
       body: Center(
         child: Container(
           padding: EdgeInsets.all(40),
@@ -60,23 +58,25 @@ class _AgendaFormState extends State<Agendar> {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8.0, 16, 8.0, 16),
-                          child: Text(nomecliente_label, style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.grey[600]
-                          ),),
+                          child: Text(
+                            nomecliente_label,
+                            style: TextStyle(
+                                fontSize: 20, color: Colors.grey[600]),
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8.0, 16, 8.0, 16),
                           child: Icon(
-                            Icons.people, color: Colors.grey[600],),
+                            Icons.people,
+                            color: Colors.grey[600],
+                          ),
                         )
                       ],
                     ),
                     onPressed: () async {
                       _navigateAndDisplaySelection(context);
                     },
-                  )
-              ),
+                  )),
               Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
                   child: OutlineButton(
@@ -91,26 +91,30 @@ class _AgendaFormState extends State<Agendar> {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8.0, 16, 8.0, 16),
-                          child: Text(agendamento_label, style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.grey[600]
-                          ),),
+                          child: Text(
+                            agendamento_label,
+                            style: TextStyle(
+                                fontSize: 20, color: Colors.grey[600]),
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8.0, 16, 8.0, 16),
                           child: Icon(
-                            Icons.calendar_today, color: Colors.grey[600],),
+                            Icons.calendar_today,
+                            color: Colors.grey[600],
+                          ),
                         )
                       ],
                     ),
                     onPressed: () async {
-                      final dtPick = await showDatePicker(context: context,
+                      final dtPick = await showDatePicker(
+                          context: context,
                           initialDate: DateTime.now(),
                           firstDate: DateTime(1980),
                           lastDate: DateTime(2100));
                       print(dtPick);
-                      String data_formatada = formatDate(
-                          dtPick, [dd, '/', mm, '/', yyyy]);
+                      String data_formatada =
+                          formatDate(dtPick, [dd, '/', mm, '/', yyyy]);
                       print(data_formatada);
 
                       setState(() {
@@ -119,28 +123,19 @@ class _AgendaFormState extends State<Agendar> {
 
                       _dataController.text = data_formatada;
                     },
-                  )
-              ),
-
-
+                  )),
               Padding(
                 padding: const EdgeInsets.only(top: 8, bottom: 8),
                 child: TextField(
-                    controller: controller,
+                  controller: controller,
                   style: style,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                       hintText: 'Horário',
                       border: OutlineInputBorder(
-
-                          borderRadius: BorderRadius.circular((40))
-                      )
-                  ),
-
+                          borderRadius: BorderRadius.circular((40)))),
                 ),
               ),
-
-
               TextField(
                 controller: _servicoController,
                 obscureText: false,
@@ -148,9 +143,7 @@ class _AgendaFormState extends State<Agendar> {
                 decoration: InputDecoration(
                     hintText: 'Serviço',
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular((40))
-                    )
-                ),
+                        borderRadius: BorderRadius.circular((40)))),
               ),
             ],
           ),
@@ -164,8 +157,8 @@ class _AgendaFormState extends State<Agendar> {
           final String horaAg = controller.text;
           final String servicoAg = _servicoController.text;
 
-          final Agendamentos newAgendamento = Agendamentos(0, clienteAg, dataAg,
-              horaAg, servicoAg);
+          final Agendamentos newAgendamento =
+              Agendamentos(0, clienteAg, dataAg, horaAg, servicoAg);
           _dao.save(newAgendamento).then((id) => Navigator.pop(context));
         },
         child: Icon(Icons.save),
@@ -180,17 +173,12 @@ class _AgendaFormState extends State<Agendar> {
       context,
       // Create the SelectionScreen in the next step.
       MaterialPageRoute(builder: (context) => SelecionarCliente()),
-
     );
     setState(() {
-      if(result != null) {
+      if (result != null) {
         nomecliente_label = result;
         _clieController.text = result;
       }
     });
   }
-
 }
-
-
-
