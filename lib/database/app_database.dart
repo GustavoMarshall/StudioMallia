@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:studiomallia/models/agendamentos.dart'
+import 'package:studiomallia/models/agendamentos.dart';
 
 Future<Database> getDatabase() async {
   final String sql_agendamentos = 'CREATE TABLE agendamentos('
@@ -20,7 +20,7 @@ Future<Database> getDatabase() async {
       'cidade TEXT,'
       'estado TEXT)';
 
-  final String sql_agendaData = 'SELECT * FROM agendamentos WHERE dataagendamento = $dataagendamento ORDER BY horario asc;';
+  final String sql_agendaData = 'SELECT * FROM agendamentos WHERE dataagendamento = ? ORDER BY horario asc;';
 
   final String path = join(await getDatabasesPath(), 'studiomallia_databasev6.db');
   return openDatabase(path, onCreate: (db, version) async {
