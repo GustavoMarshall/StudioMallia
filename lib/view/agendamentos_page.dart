@@ -56,10 +56,10 @@ class _ConsultarListState extends State<Consultar> {
                       ? Column(
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.only(left: 110, right: 110),
+                              padding: const EdgeInsets.only(left: 140, right: 140),
                               child: RaisedButton(
 
-                                  color: Colors.grey,
+                                  color: Colors.lightBlueAccent,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18.0),
                                   ),
@@ -69,7 +69,7 @@ class _ConsultarListState extends State<Consultar> {
 
                                     print(agendamento.toString());
                                     setState(() {
-                                      return agendamentos;
+                                      return Agendamentos;
                                     });
                                   },
                                   child: Row(
@@ -117,6 +117,7 @@ class __AgendaItemState extends State<_AgendaItem> {
   @override
   Widget build(BuildContext context) {
     final AgendamentosDao _dao = AgendamentosDao();
+
     // TODO: implement build
     return ExpansionTile(
       title: Text(
@@ -129,6 +130,7 @@ class __AgendaItemState extends State<_AgendaItem> {
 
       children: <Widget>[
         IconButton(
+
           onPressed: () {
             final String cliente = widget.agendamentos.clienteAg;
             final String data = widget.agendamentos.dataAg;
@@ -139,11 +141,11 @@ class __AgendaItemState extends State<_AgendaItem> {
 
             final Agendamentos newAgendamento =
             Agendamentos(0, cliente, data, horario, servico);
-            _dao.delete(1).then((id) => Navigator.pop(context));
+            _dao.delete(0).then((id) => Navigator.pop(context));
 
             print(newAgendamento);
           },
-          icon: Icon(Icons.check_box),
+          icon: Icon(Icons.check_box,color: Colors.green,),
 
         ),
       ]

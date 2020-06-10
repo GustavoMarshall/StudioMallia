@@ -114,25 +114,28 @@ class __ClientesItemState extends State<_ClientesItem> {
                       'Cidade: ${widget.clientes.cidade} - '
                       'Estado: ${widget.clientes.estado}'),
                 ),
-                IconButton(
-                  onPressed: () {
-                    final String name = widget.clientes.nome;
-                    final String cpf = widget.clientes.cpf;
-                    final String datanascimento = widget.clientes.datanascimento;
-                    final String telefone = widget.clientes.telefone;
-                    final String rua = widget.clientes.rua;
-                    final String cidade = widget.clientes.cidade;
-                    final String estado = widget.clientes.estado;
+                Padding(
+                  padding: const EdgeInsets.only(left:150, right:150),
+                  child: IconButton(
+                    onPressed: () {
+                      final String name = widget.clientes.nome;
+                      final String cpf = widget.clientes.cpf;
+                      final String datanascimento = widget.clientes.datanascimento;
+                      final String telefone = widget.clientes.telefone;
+                      final String rua = widget.clientes.rua;
+                      final String cidade = widget.clientes.cidade;
+                      final String estado = widget.clientes.estado;
 
 
-                    final Clientes newClientes = Clientes(0, name, cpf,
-                        datanascimento, telefone, rua, cidade, estado);
-                    _dao.deleteCustomer(2).then((id) => Navigator.pop(context));
+                      final Clientes newClientes = Clientes(0, name, cpf,
+                          datanascimento, telefone, rua, cidade, estado);
+                      _dao.deleteCustomer(22).then((id) => Navigator.pop(context));
 
-                    print(newClientes);
-                  },
-                  icon: Icon(Icons.delete),
+                      print(newClientes);
+                    },
+                    icon: Icon(Icons.delete, color: Colors.red,),
 
+                  ),
                 ),
               ],
             ),
