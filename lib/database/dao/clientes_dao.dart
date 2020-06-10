@@ -19,6 +19,10 @@ class ClientesDao {
     Map<String, dynamic> contactMap = _toMap(clientes);
     return db.insert('clientes', contactMap);
   }
+  Future<int> deleteCustomer(int id) async {
+    final Database db = await getDatabase();
+    return await db.rawDelete('DELETE FROM clientes WHERE id = $id');
+  }
 
   Map<String, dynamic> _toMap(Clientes clientes) {
     final Map<String, dynamic> clientesMap = Map();
@@ -47,6 +51,7 @@ class ClientesDao {
       final Clientes cliente =
       Clientes(row['id'], row['nome'] , row['cpf'], row['datanascimento'], row['telefone'], row['rua'], row['cidade'], row['estado']);
       clientes.add(cliente);
+
     }
     return clientes;
   }

@@ -51,6 +51,8 @@ class _TelaClienteListState extends State<TelaCliente> {
                 itemBuilder: (context, index) {
                   final Clientes clientes = cliente[index];
                   return _ClientesItem(clientes: clientes);
+
+
                 },
                 itemCount: cliente.length,
               );
@@ -84,6 +86,7 @@ class _ClientesItem extends StatefulWidget {
 class __ClientesItemState extends State<_ClientesItem> {
   @override
   Widget build(BuildContext context) {
+    final ClientesDao _dao = ClientesDao();
     // TODO: implement build
     return ExpansionTile(
 
@@ -110,7 +113,27 @@ class __ClientesItemState extends State<_ClientesItem> {
                   child: Text('Endereço: Rua/Av: ${widget.clientes.rua} - '
                       'Cidade: ${widget.clientes.cidade} - '
                       'Estado: ${widget.clientes.estado}'),
-                )
+                ),
+                IconButton(
+                  onPressed: () {
+                    final String name = widget.clientes.nome;
+                    final String cpf = widget.clientes.cpf;
+                    final String datanascimento = widget.clientes.datanascimento;
+                    final String telefone = widget.clientes.telefone;
+                    final String rua = widget.clientes.rua;
+                    final String cidade = widget.clientes.cidade;
+                    final String estado = widget.clientes.estado;
+
+
+                    final Clientes newClientes = Clientes(0, name, cpf,
+                        datanascimento, telefone, rua, cidade, estado);
+                    _dao.deleteCustomer(2).then((id) => Navigator.pop(context));
+
+                    print(newClientes);
+                  },
+                  icon: Icon(Icons.delete),
+
+                ),
               ],
             ),
           ),

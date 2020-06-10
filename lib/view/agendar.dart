@@ -1,4 +1,3 @@
-
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:studiomallia/database/dao/agendamentos_dao.dart';
@@ -126,7 +125,7 @@ class _AgendaFormState extends State<Agendar> {
               Padding(
                 padding: const EdgeInsets.only(top: 8, bottom: 8),
                 child: TextField(
-                    controller: controller,
+                  controller: controller,
                   style: style,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
@@ -183,7 +182,7 @@ class _AgendaFormState extends State<Agendar> {
 
     );
     setState(() {
-      if(result != null) {
+      if (result != null) {
         nomecliente_label = result;
         _clieController.text = result;
       }
