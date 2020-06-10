@@ -55,12 +55,30 @@ class _ConsultarListState extends State<Consultar> {
                   return index == 0
                       ? Column(
                           children: <Widget>[
-                            RaisedButton(
-                              child: Text("Ordenar"),
-                              onPressed: () {
-                                agendamento.sort((a, b) => a.dataAg .compareTo(b.dataAg));
-                                print(agendamento.toString());
-                              },
+                            Padding(
+                              padding: const EdgeInsets.only(left: 110, right: 110),
+                              child: RaisedButton(
+
+                                  color: Colors.grey,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                  ),
+                                  onPressed: () {
+                                    agendamento.sort(
+                                        (a, b) => a.dataAg.compareTo(b.dataAg));
+
+                                    print(agendamento.toString());
+                                    setState(() {
+                                      return agendamentos;
+                                    });
+                                  },
+                                  child: Row(
+                                    children: <Widget>[
+
+                                      Icon(Icons.low_priority),
+                                      Text("Ordenar")
+                                    ],
+                                  )),
                             ),
                             _AgendaItem(agendamentos: agendamentos)
                           ],
@@ -98,6 +116,7 @@ class _AgendaItem extends StatefulWidget {
 class __AgendaItemState extends State<_AgendaItem> {
   @override
   Widget build(BuildContext context) {
+    final AgendamentosDao _dao = AgendamentosDao();
     // TODO: implement build
     return ExpansionTile(
       title: Text(
@@ -107,6 +126,28 @@ class __AgendaItemState extends State<_AgendaItem> {
       subtitle: Text('Data agendada: ${widget.agendamentos.dataAg} \n'
           'Horario: ${widget.agendamentos.horaAg} \n'
           'Serviço: ${widget.agendamentos.servicoAg} \n'),
+
+      children: <Widget>[
+        IconButton(
+          onPressed: () {
+            final String cliente = widget.agendamentos.clienteAg;
+            final String data = widget.agendamentos.dataAg;
+            final String horario = widget.agendamentos.horaAg;
+            final String servico = widget.agendamentos.servicoAg;
+
+
+
+            final Agendamentos newAgendamento =
+            Agendamentos(0, cliente, data, horario, servico);
+            _dao.delete(1).then((id) => Navigator.pop(context));
+
+            print(newAgendamento);
+          },
+          icon: Icon(Icons.check_box),
+
+        ),
+      ]
+
     );
   }
 }

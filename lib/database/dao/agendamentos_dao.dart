@@ -17,6 +17,10 @@ class AgendamentosDao {
     Map<String, dynamic> agendaMap = _toMap(agendamentos);
     return db.insert('Agendamentos', agendaMap);
   }
+  Future<int> delete(int id) async {
+    final Database db = await getDatabase();
+    return await db.rawDelete('DELETE FROM Agendamentos WHERE id = $id');
+  }
 
   Map<String, dynamic> _toMap(Agendamentos agendamentos) {
     final Map<String, dynamic> agendamentosMap = Map();
