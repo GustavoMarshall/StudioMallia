@@ -118,6 +118,7 @@ class __ClientesItemState extends State<_ClientesItem> {
                   padding: const EdgeInsets.only(left:150, right:150),
                   child: IconButton(
                     onPressed: () {
+                      final int id = widget.clientes.id;
                       final String name = widget.clientes.nome;
                       final String cpf = widget.clientes.cpf;
                       final String datanascimento = widget.clientes.datanascimento;
@@ -127,9 +128,9 @@ class __ClientesItemState extends State<_ClientesItem> {
                       final String estado = widget.clientes.estado;
 
 
-                      final Clientes newClientes = Clientes(0, name, cpf,
+                      final Clientes newClientes = Clientes(id, name, cpf,
                           datanascimento, telefone, rua, cidade, estado);
-                      _dao.deleteCustomer(22).then((id) => Navigator.pop(context));
+                      _dao.deleteCustomer(id).then((id) => Navigator.pop(context));
 
                       print(newClientes);
                     },

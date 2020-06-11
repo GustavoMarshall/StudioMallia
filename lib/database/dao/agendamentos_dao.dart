@@ -19,7 +19,7 @@ class AgendamentosDao {
   }
   Future<int> delete(int id) async {
     final Database db = await getDatabase();
-    return await db.rawDelete('DELETE FROM Agendamentos WHERE id = $id');
+    return await db.rawDelete('DELETE FROM agendamentos WHERE id = $id');
   }
 
   Map<String, dynamic> _toMap(Agendamentos agendamentos) {

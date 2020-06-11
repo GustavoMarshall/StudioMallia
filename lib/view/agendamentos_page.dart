@@ -132,6 +132,7 @@ class __AgendaItemState extends State<_AgendaItem> {
         IconButton(
 
           onPressed: () {
+            final int id = widget.agendamentos.id;
             final String cliente = widget.agendamentos.clienteAg;
             final String data = widget.agendamentos.dataAg;
             final String horario = widget.agendamentos.horaAg;
@@ -140,8 +141,8 @@ class __AgendaItemState extends State<_AgendaItem> {
 
 
             final Agendamentos newAgendamento =
-            Agendamentos(0, cliente, data, horario, servico);
-            _dao.delete(0).then((id) => Navigator.pop(context));
+            Agendamentos(id, cliente, data, horario, servico);
+            _dao.delete(id).then((id) => Navigator.pop(context));
 
             print(newAgendamento);
           },
