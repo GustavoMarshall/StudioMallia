@@ -51,8 +51,6 @@ class _TelaClienteListState extends State<TelaCliente> {
                 itemBuilder: (context, index) {
                   final Clientes clientes = cliente[index];
                   return _ClientesItem(clientes: clientes);
-
-
                 },
                 itemCount: cliente.length,
               );
@@ -89,7 +87,6 @@ class __ClientesItemState extends State<_ClientesItem> {
     final ClientesDao _dao = ClientesDao();
     // TODO: implement build
     return ExpansionTile(
-
       title: Text(
         widget.clientes.nome,
         style: GoogleFonts.ptSans(fontSize: 24, fontWeight: FontWeight.bold),
@@ -114,30 +111,46 @@ class __ClientesItemState extends State<_ClientesItem> {
                       'Cidade: ${widget.clientes.cidade} - '
                       'Estado: ${widget.clientes.estado}'),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left:150, right:150),
-                  child: IconButton(
-                    onPressed: () {
-                      final int id = widget.clientes.id;
-                      final String name = widget.clientes.nome;
-                      final String cpf = widget.clientes.cpf;
-                      final String datanascimento = widget.clientes.datanascimento;
-                      final String telefone = widget.clientes.telefone;
-                      final String rua = widget.clientes.rua;
-                      final String cidade = widget.clientes.cidade;
-                      final String estado = widget.clientes.estado;
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    RaisedButton(
+                        color: Colors.pink,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                        ),
+                        onPressed: () {
+                          final int id = widget.clientes.id;
+                          final String name = widget.clientes.nome;
+                          final String cpf = widget.clientes.cpf;
+                          final String datanascimento =
+                              widget.clientes.datanascimento;
+                          final String telefone = widget.clientes.telefone;
+                          final String rua = widget.clientes.rua;
+                          final String cidade = widget.clientes.cidade;
+                          final String estado = widget.clientes.estado;
 
+                          final Clientes newClientes = Clientes(id, name, cpf,
+                              datanascimento, telefone, rua, cidade, estado);
+                          _dao
+                              .deleteCustomer(id)
+                              .then((id) => Navigator.pop(context));
 
-                      final Clientes newClientes = Clientes(id, name, cpf,
-                          datanascimento, telefone, rua, cidade, estado);
-                      _dao.deleteCustomer(id).then((id) => Navigator.pop(context));
-
-                      print(newClientes);
-                    },
-                    icon: Icon(Icons.delete, color: Colors.red,),
-
-                  ),
-                ),
+                          print(newClientes);
+                        },
+                        child: Row(
+                          children: <Widget>[
+                            Text(
+                              "Remover Cliente",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        )),
+                  ],
+                )
               ],
             ),
           ),

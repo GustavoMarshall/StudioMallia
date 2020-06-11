@@ -16,12 +16,35 @@ class menuprincipal extends StatelessWidget {
         fontFamily: 'Montserrat', fontSize: 20.0, fontWeight: FontWeight.bold);
 
     return Scaffold(
+      appBar: AppBar(
+        title: Container(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                icon: Icon(Icons.exit_to_app),
+                color: Color.fromRGBO(222, 72, 111, 1),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        ),
+        backgroundColor: Color.fromRGBO(255, 192, 203, 1),
+        elevation: 0,
+        leading: Icon(
+          Icons.http,
+          color: Color.fromRGBO(255, 192, 203, 1),
+        ),
+      ),
       body: Container(
         child: Column(
           children: <Widget>[
             SizedBox(
               width: size.width,
-              height: size.height / 3,
+              height: size.height / 4.5,
               child: Container(
                 decoration: BoxDecoration(
                     color: Color.fromRGBO(255, 192, 203, 1),
@@ -55,190 +78,102 @@ class menuprincipal extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 32),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        width: size.width / 2,
-                        height: size.height / 4,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) => Consultar()));
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Color.fromRGBO(255, 192, 203, 1),
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    topRight: Radius.circular(20),
-                                    bottomLeft: Radius.circular(20),
-                                    bottomRight: Radius.circular(20))),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(
-                                  Icons.calendar_today,
-                                  size: 64,
-                                  color: Color.fromRGBO(222, 72, 111, 1),
-                                ),
-                                Text(
-                                  'Agendamentos',
-                                  style: GoogleFonts.ptSans(
-                                      color: Color.fromRGBO(222, 72, 111, 1),
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ),
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8, left: 8),
+                    child: SizedBox(
+                      width: size.width - 16,
+                      height: size.height / 4,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      Consultar()));
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Color.fromRGBO(255, 192, 203, 1),
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
+                                  bottomLeft: Radius.circular(20),
+                                  bottomRight: Radius.circular(20))),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(
+                                Icons.calendar_today,
+                                size: 64,
+                                color: Color.fromRGBO(222, 72, 111, 1),
+                              ),
+                              Text(
+                                'Agendamentos',
+                                style: GoogleFonts.ptSans(
+                                    color: Color.fromRGBO(222, 72, 111, 1),
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
                           ),
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: SizedBox(
-                        width: size.width / 2,
-                        height: size.height / 4,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) => TelaCliente()));
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Color.fromRGBO(255, 192, 203, 1),
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    topRight: Radius.circular(20),
-                                    bottomLeft: Radius.circular(20),
-                                    bottomRight: Radius.circular(20))),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(
-                                  Icons.people,
-                                  size: 64,
-                                  color: Color.fromRGBO(222, 72, 111, 1),
-                                ),
-                                Text(
-                                  'Clientes',
-                                  style: GoogleFonts.ptSans(
-                                      color: Color.fromRGBO(222, 72, 111, 1),
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 8),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: <Widget>[
-//                    Padding(
-//                      padding: const EdgeInsets.all(8.0),
-//                      child: SizedBox(
-//                        width: size.width / 2,
-//                        height: size.height / 4,
-//                        child: InkWell(
-//                          onTap: () {
-//                            Navigator.push(
-//                                context,
-//                                MaterialPageRoute(
-//                                    builder: (BuildContext context) => Consultar()));
-//                          },
-//                          child: Container(
-//                            decoration: BoxDecoration(
-//                                color: Color.fromRGBO(255, 192, 203, 1),
-//                                borderRadius: BorderRadius.only(
-//                                    topLeft: Radius.circular(20),
-//                                    topRight: Radius.circular(20),
-//                                    bottomLeft: Radius.circular(20),
-//                                    bottomRight: Radius.circular(20))),
-//                            child: Column(
-//                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                              crossAxisAlignment: CrossAxisAlignment.center,
-//                              children: <Widget>[
-//                                Icon(
-//                                  Icons.list,
-//                                  size: 64,
-//                                  color: Color.fromRGBO(222, 72, 111, 1),
-//                                ),
-//                                Text(
-//                                  'Consultar',
-//                                  style: GoogleFonts.ptSans(
-//                                      color: Color.fromRGBO(222, 72, 111, 1),
-//                                      fontSize: 24,
-//                                      fontWeight: FontWeight.bold),
-//                                )
-//                              ],
-//                            ),
-//                          ),
-//                        ),
-//                      ),
-//                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: SizedBox(
-                        width: size.width / 2,
-                        height: size.height / 4,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) => MyApp()));
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Color.fromRGBO(255, 192, 203, 1),
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    topRight: Radius.circular(20),
-                                    bottomLeft: Radius.circular(20),
-                                    bottomRight: Radius.circular(20))),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(
-                                  Icons.exit_to_app,
-                                  size: 64,
-                                  color: Color.fromRGBO(222, 72, 111, 1),
-                                ),
-                                Text(
-                                  'Sair',
-                                  style: GoogleFonts.ptSans(
-                                      color: Color.fromRGBO(222, 72, 111, 1),
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ),
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8, left: 8),
+                    child: SizedBox(
+                      width: size.width - 16,
+                      height: size.height / 4,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      TelaCliente()));
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Color.fromRGBO(255, 192, 203, 1),
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
+                                  bottomLeft: Radius.circular(20),
+                                  bottomRight: Radius.circular(20))),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(
+                                Icons.people,
+                                size: 64,
+                                color: Color.fromRGBO(222, 72, 111, 1),
+                              ),
+                              Text(
+                                'Clientes',
+                                style: GoogleFonts.ptSans(
+                                    color: Color.fromRGBO(222, 72, 111, 1),
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
                           ),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],

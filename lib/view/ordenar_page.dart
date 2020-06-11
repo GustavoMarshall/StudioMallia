@@ -8,14 +8,20 @@ import 'package:studiomallia/models/agendamentos.dart';
 import 'package:studiomallia/view/agendar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:studiomallia/view/ordenar_page.dart';
 
-class Consultar extends StatefulWidget {
+import '../models/agendamentos.dart';
+import 'menuprincipal.dart';
+
+class OrdernarPage extends StatefulWidget {
+  final List<Agendamentos> agendamentos;
+
+  const OrdernarPage({Key key, this.agendamentos}) : super(key: key);
+
   @override
-  _ConsultarListState createState() => _ConsultarListState();
+  _OrdenarPageState createState() => _OrdenarPageState();
 }
 
-class _ConsultarListState extends State<Consultar> {
+class _OrdenarPageState extends State<OrdernarPage> {
   final AgendamentosDao _dao = AgendamentosDao();
   String agendamento_label = 'Data de Agendamento';
 
@@ -25,68 +31,61 @@ class _ConsultarListState extends State<Consultar> {
       appBar: AppBar(
         title: Text('Agendamentos'),
         backgroundColor: Colors.pink,
+        leading: IconButton(
+          icon: Icon(
+            Icons.chevron_left,
+            color: Colors.white,
+            size: 35,
+          ),
+          onPressed: () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => menuprincipal())),
+        ),
       ),
       body: SafeArea(
-          child: FutureBuilder<List<Agendamentos>>(
-        initialData: List(),
-        future: _dao.findAll(),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-              break;
-            case ConnectionState.waiting:
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+          child: ListView.builder(
+        itemBuilder: (context, index) {
+          Agendamentos agendamentos = this.widget.agendamentos[index];
+          return index == 0
+              ? Column(
                   children: <Widget>[
-                    CircularProgressIndicator(),
-                    Text('Carregando')
-                  ],
-                ),
-              );
-              break;
-            case ConnectionState.active:
-              break;
-            case ConnectionState.done:
-              List<Agendamentos> agendamento = snapshot.data;
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  Agendamentos agendamentos = agendamento[index];
-                  return index == 0
-                      ? Column(
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text('Ordenar por data', style: TextStyle(color: Colors.pink, fontWeight: FontWeight.bold),),
-                                IconButton(
-                                  icon: Icon(Icons.filter_list),
-                                  color: Colors.pink,
-                                  onPressed: () {
-                                    agendamento.sort(
-                                        (a, b) => a.dataAg.compareTo(b.dataAg));
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => OrdernarPage(agendamentos: agendamento,)));
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          'Ordenar por data',
+                          style: TextStyle(
+                              color: Colors.pink, fontWeight: FontWeight.bold),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.filter_list),
+                          color: Colors.pink,
+                          onPressed: () {
+                            this
+                                .widget
+                                .agendamentos
+                                .sort((a, b) => a.dataAg.compareTo(b.dataAg));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => OrdernarPage(
+                                          agendamentos:
+                                              this.widget.agendamentos,
+                                        )));
 
-                                    print(agendamento.toString());
-                                    setState(() {
-                                      return Agendamentos;
-                                    });
-                                  },
-                                )
-                              ],
-                            ),
-                            _AgendaItem(agendamentos: agendamentos)
-                          ],
+                            print(this.widget.agendamentos.toString());
+                            setState(() {
+                              return Agendamentos;
+                            });
+                          },
                         )
-                      : _AgendaItem(agendamentos: agendamentos);
-                },
-                itemCount: agendamento.length,
-              );
-              break;
-          }
-          return Container();
+                      ],
+                    ),
+                    _AgendaItem(agendamentos: agendamentos)
+                  ],
+                )
+              : _AgendaItem(agendamentos: agendamentos);
         },
+        itemCount: this.widget.agendamentos.length,
       )),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.pink,

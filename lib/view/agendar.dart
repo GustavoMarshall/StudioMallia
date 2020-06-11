@@ -41,7 +41,7 @@ class _AgendaFormState extends State<Agendar> {
       ),
       body: Center(
         child: Container(
-          padding: EdgeInsets.all(40),
+          padding: EdgeInsets.all(16),
           child: ListView(
             children: <Widget>[
               Padding(
@@ -141,27 +141,45 @@ class _AgendaFormState extends State<Agendar> {
                 obscureText: false,
                 style: style,
                 decoration: InputDecoration(
-                    hintText: 'Serviço',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular((40)))),
+                  hintText: 'Serviço',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      (40),
+                    ),
+                  ),
+                ),
               ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 32, 0, 0),
+                child: RaisedButton(
+                  color: Colors.pink,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 16, bottom: 16),
+                    child: Text(
+                      "Salvar",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40)),
+                  onPressed: () {
+                    final String clienteAg = _clieController.text;
+                    final String dataAg = _dataController.text;
+                    final String horaAg = controller.text;
+                    final String servicoAg = _servicoController.text;
+
+                    final Agendamentos newAgendamento =
+                        Agendamentos(0, clienteAg, dataAg, horaAg, servicoAg);
+                    _dao
+                        .save(newAgendamento)
+                        .then((id) => Navigator.pop(context));
+                  },
+                ),
+              )
             ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.pink,
-        onPressed: () {
-          final String clienteAg = _clieController.text;
-          final String dataAg = _dataController.text;
-          final String horaAg = controller.text;
-          final String servicoAg = _servicoController.text;
-
-          final Agendamentos newAgendamento =
-              Agendamentos(0, clienteAg, dataAg, horaAg, servicoAg);
-          _dao.save(newAgendamento).then((id) => Navigator.pop(context));
-        },
-        child: Icon(Icons.save),
       ),
     );
   }
