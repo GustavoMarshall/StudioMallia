@@ -31,6 +31,8 @@ class _WidgetLoginState extends State<WidgetLogin> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   TextEditingController _userController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  final String usuario = "studio";
+  final String senha = "mallia";
   final _formKey = GlobalKey<FormState>();
   Color gradient_1 = Color.fromRGBO(255, 192, 203, 1);
   Color gradient_2 = Color.fromRGBO(255, 192, 203, 0.95);
@@ -78,6 +80,7 @@ class _WidgetLoginState extends State<WidgetLogin> {
                         child: Padding(
                             padding: const EdgeInsets.fromLTRB(32.0, 8, 32, 0),
                             child: TextFormField(
+                              controller: _userController,
                               decoration: InputDecoration(
                                 labelText: 'Usuario',
                                 labelStyle: GoogleFonts.ptSans(
@@ -107,6 +110,7 @@ class _WidgetLoginState extends State<WidgetLogin> {
                         child: Padding(
                             padding: const EdgeInsets.fromLTRB(32.0, 8, 32, 0),
                             child: TextFormField(
+                              controller: _passwordController,
                               decoration: InputDecoration(
                                 labelText: 'Senha',
                                 labelStyle: GoogleFonts.ptSans(
@@ -141,13 +145,17 @@ class _WidgetLoginState extends State<WidgetLogin> {
                             child: RaisedButton(
                               color: Color.fromRGBO(222, 72, 111, 1),
                               onPressed: () {
-                                if (_formKey.currentState.validate()) {
+                                if (_userController.text == usuario && _passwordController.text == senha && _formKey.currentState.validate()) {
 
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (BuildContext context) =>
                                               menuprincipal()));
+                                }
+                                else if(_formKey.currentState.validate()){
+
+
                                 }
                               },
                               child: Text(

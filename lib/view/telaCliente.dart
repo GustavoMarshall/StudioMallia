@@ -112,7 +112,7 @@ class __ClientesItemState extends State<_ClientesItem> {
                       'Estado: ${widget.clientes.estado}'),
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     RaisedButton(
@@ -148,7 +148,30 @@ class __ClientesItemState extends State<_ClientesItem> {
                                   fontWeight: FontWeight.bold),
                             )
                           ],
-                        )),
+                        )
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 70),
+                      child: RaisedButton(
+                          color: Colors.pink,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                          ),
+                          onPressed: () {
+
+                          },
+                          child: Row(
+                            children: <Widget>[
+                              Text(
+                                "Atualizar Dados",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          )
+                      ),
+                    ),
                   ],
                 )
               ],
