@@ -111,6 +111,7 @@ class _WidgetLoginState extends State<WidgetLogin> {
                             padding: const EdgeInsets.fromLTRB(32.0, 8, 32, 0),
                             child: TextFormField(
                               controller: _passwordController,
+                              obscureText: true,
                               decoration: InputDecoration(
                                 labelText: 'Senha',
                                 labelStyle: GoogleFonts.ptSans(

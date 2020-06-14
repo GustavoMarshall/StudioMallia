@@ -27,7 +27,6 @@ class ClientesDao {
 
   Map<String, dynamic> _toMap(Clientes clientes) {
     final Map<String, dynamic> clientesMap = Map();
-    clientesMap['id'] = clientes.id;
     clientesMap['nome'] = clientes.nome;
     clientesMap['cpf'] = clientes.cpf;
     clientesMap['datanascimento'] = clientes.datanascimento;

@@ -5,6 +5,7 @@ import 'package:studiomallia/database/app_database.dart';
 import 'package:studiomallia/database/dao/agendamentos_dao.dart';
 import 'package:studiomallia/main.dart';
 import 'package:studiomallia/models/agendamentos.dart';
+import 'package:studiomallia/view/agendamentos_page.dart';
 import 'package:studiomallia/view/agendar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -127,17 +128,7 @@ class __AgendaItemState extends State<_AgendaItem> {
             children: [
               IconButton(
                 onPressed: () {
-                  final int id = widget.agendamentos.id;
-                  final String cliente = widget.agendamentos.clienteAg;
-                  final String data = widget.agendamentos.dataAg;
-                  final String horario = widget.agendamentos.horaAg;
-                  final String servico = widget.agendamentos.servicoAg;
-
-                  final Agendamentos newAgendamento =
-                      Agendamentos(id, cliente, data, horario, servico);
-                  _dao.delete(id).then((id) => Navigator.pop(context));
-
-                  print(newAgendamento);
+                 showAlertDialog2(context);
                 },
                 icon: Icon(
                   Icons.check_box,
@@ -148,5 +139,48 @@ class __AgendaItemState extends State<_AgendaItem> {
             ],
           ),
         ]);
+  }
+  final AgendamentosDao _dao = AgendamentosDao();
+  showAlertDialog2(BuildContext context) {
+    Widget cancelaButton = FlatButton(
+      child: Text("Cancelar"),
+      onPressed:  () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Consultar()));
+      },
+    );
+    Widget continuaButton = FlatButton(
+      child: Text("Finalizar"),
+      onPressed:  () {
+        final int id = widget.agendamentos.id;
+        final String cliente = widget.agendamentos.clienteAg;
+        final String data = widget.agendamentos.dataAg;
+        final String horario = widget.agendamentos.horaAg;
+        final String servico = widget.agendamentos.servicoAg;
+
+        final Agendamentos newAgendamento =
+        Agendamentos(id, cliente, data, horario, servico);
+        _dao.delete(id).then((id) => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => menuprincipal())));
+
+        print(newAgendamento);
+      },
+    );
+    //configura o AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Atenção!"),
+      content: Text("Deseja finalizar este atendimento ?"),
+      actions: [
+        cancelaButton,
+        continuaButton,
+      ],
+    );
+    //exibe o diálogo
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }

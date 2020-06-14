@@ -20,7 +20,7 @@ Future<Database> getDatabase() async {
       'cidade TEXT,'
       'estado TEXT)';
 
-  final String sql_agendaData = 'SELECT * FROM agendamentos WHERE dataagendamento = ? ORDER BY horario asc;';
+
 
   final String path = join(await getDatabasesPath(), 'studiomallia_databasev6.db');
   return openDatabase(path, onCreate: (db, version) async {
@@ -28,7 +28,7 @@ Future<Database> getDatabase() async {
     await db.execute(sql_agendamentos);
     print('Executando SQL CLIENTES: $sql_clientes');
     await db.execute(sql_clientes);
-    await db.execute(sql_agendaData);
+
   }, version: 1);
 }
 

@@ -7,6 +7,7 @@ import 'package:studiomallia/models/clientes.dart';
 import 'package:studiomallia/view/cadastrar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:studiomallia/view/menuprincipal.dart';
 
 
 
@@ -88,7 +89,7 @@ class _ClientesItem extends StatefulWidget {
 class __ClientesItemState extends State<_ClientesItem> {
   @override
   Widget build(BuildContext context) {
-    final ClientesDao _dao = ClientesDao();
+
 
     // TODO: implement build
     return ExpansionTile(
@@ -126,22 +127,7 @@ class __ClientesItemState extends State<_ClientesItem> {
                           borderRadius: BorderRadius.circular(18.0),
                         ),
                         onPressed: () {
-                          final int id = widget.clientes.id;
-                          final String name = widget.clientes.nome;
-                          final String cpf = widget.clientes.cpf;
-                          final String datanascimento =
-                              widget.clientes.datanascimento;
-                          final String telefone = widget.clientes.telefone;
-                          final String rua = widget.clientes.rua;
-                          final String cidade = widget.clientes.cidade;
-                          final String estado = widget.clientes.estado;
-
-                          final Clientes newClientes = Clientes(id, name, cpf,
-                              datanascimento, telefone, rua, cidade, estado);
-                          _dao.deleteCustomer(id)
-                              .then((id) => Navigator.pop(context));
-
-                          print(newClientes);
+                         showAlertDialog2(context);
                         },
                         child: Row(
                           children: <Widget>[
@@ -161,6 +147,53 @@ class __ClientesItemState extends State<_ClientesItem> {
           ),
         )
       ],
+    );
+  }
+  final ClientesDao _dao = ClientesDao();
+  showAlertDialog2(BuildContext context) {
+    Widget cancelaButton = FlatButton(
+      child: Text("Cancelar"),
+      onPressed:  () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => TelaCliente()));
+      },
+    );
+    Widget continuaButton = FlatButton(
+      child: Text("Excluir"),
+      onPressed:  () {
+        final int id = widget.clientes.id;
+        final String name = widget.clientes.nome;
+        final String cpf = widget.clientes.cpf;
+        final String datanascimento =
+            widget.clientes.datanascimento;
+        final String telefone = widget.clientes.telefone;
+        final String rua = widget.clientes.rua;
+        final String cidade = widget.clientes.cidade;
+        final String estado = widget.clientes.estado;
+
+        final Clientes newClientes = Clientes(id, name, cpf,
+            datanascimento, telefone, rua, cidade, estado);
+        _dao.deleteCustomer(id)
+            .then((id) => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => menuprincipal())));
+        print(newClientes);
+      },
+    );
+    //configura o AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Atenção!"),
+      content: Text("Deseja excluir este cliente ?"),
+      actions: [
+        cancelaButton,
+        continuaButton,
+      ],
+    );
+    //exibe o diálogo
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

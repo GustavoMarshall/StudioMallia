@@ -14,6 +14,6 @@ class Clientes {
   @override
   String toString() {
     // TODO: implement toString
-    return 'Cliente{id: $id, nome: $nome, cpf: $cpf, datanascimento: $datanascimento, telefone : $telefone, rua: $rua, cidade: $cidade, estado:$estado';
+    return 'Cliente{ nome: $nome, cpf: $cpf, datanascimento: $datanascimento, telefone : $telefone, rua: $rua, cidade: $cidade, estado:$estado';
   }
 }

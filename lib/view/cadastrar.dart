@@ -111,7 +111,7 @@ class _ClientesFormState extends State<Cadastrar> {
                       ],
                     ),
                     onPressed: () async {
-                      final dtPick = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1980), lastDate: DateTime(2100));
+                      final dtPick = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1950), lastDate: DateTime(2100));
                       print(dtPick);
                       String data_formatada = formatDate(dtPick, [dd, '/', mm, '/', yyyy]);
                       print(data_formatada);
@@ -200,7 +200,7 @@ class _ClientesFormState extends State<Cadastrar> {
         floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.pink,
         onPressed: ( ) {
-          if (_nomeController != null) {
+
             final String name = _nomeController.text;
             final String cpf = cpfFormated.text;
             final String datanascimento = _datanascimentoController.text;
@@ -219,8 +219,8 @@ class _ClientesFormState extends State<Cadastrar> {
                 cidade,
                 estado);
             _dao.save(newClientes).then((id) => Navigator.pop(context));
-          }
-          return null;
+
+
         },
     child: Icon(Icons.save),
 

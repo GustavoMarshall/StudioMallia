@@ -27,7 +27,7 @@ class _AgendaFormState extends State<Agendar> {
   String servico_label = 'Serviço';
   final AgendamentosDao _dao = AgendamentosDao();
   var controller = new MaskedTextController(mask: '00:00');
-
+  String verificar ;
   @override
   Widget build(BuildContext context) {
     TextStyle style = TextStyle(
@@ -39,17 +39,21 @@ class _AgendaFormState extends State<Agendar> {
         title: Text("Agendar Cliente"),
         backgroundColor: Colors.pink,
       ),
+
       body: Center(
         child: Container(
           padding: EdgeInsets.all(16),
+
           child: ListView(
             children: <Widget>[
               Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
+
                   child: OutlineButton(
                     shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(30.0)),
                     borderSide: BorderSide(
+
                       color: Colors.grey,
                     ),
                     child: Row(
@@ -60,23 +64,36 @@ class _AgendaFormState extends State<Agendar> {
                           padding: const EdgeInsets.fromLTRB(8.0, 16, 8.0, 16),
                           child: Text(
                             nomecliente_label,
+
                             style: TextStyle(
                                 fontSize: 20, color: Colors.grey[600]),
+
                           ),
+
+
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8.0, 16, 8.0, 16),
                           child: Icon(
                             Icons.people,
                             color: Colors.grey[600],
+
                           ),
                         )
+
+
                       ],
+
                     ),
                     onPressed: () async {
+
                       _navigateAndDisplaySelection(context);
                     },
-                  )),
+
+
+                  )
+
+              ),
               Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
                   child: OutlineButton(
@@ -164,16 +181,17 @@ class _AgendaFormState extends State<Agendar> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(40)),
                   onPressed: () {
-                    final String clienteAg = _clieController.text;
-                    final String dataAg = _dataController.text;
-                    final String horaAg = controller.text;
-                    final String servicoAg = _servicoController.text;
+                              final String clienteAg = _clieController.text;
+                              final String dataAg = _dataController.text;
+                              final String horaAg = controller.text;
+                              final String servicoAg = _servicoController.text;
 
-                    final Agendamentos newAgendamento =
-                        Agendamentos(0, clienteAg, dataAg, horaAg, servicoAg);
-                    _dao
-                        .save(newAgendamento)
-                        .then((id) => Navigator.pop(context));
+                              final Agendamentos newAgendamento =
+                              Agendamentos(
+                                  0, clienteAg, dataAg, horaAg, servicoAg);
+                              _dao
+                                  .save(newAgendamento)
+                                  .then((id) => Navigator.pop(context));
                   },
                 ),
               )
@@ -200,3 +218,4 @@ class _AgendaFormState extends State<Agendar> {
     });
   }
 }
+
