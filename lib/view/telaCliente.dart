@@ -8,16 +8,19 @@ import 'package:studiomallia/view/cadastrar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
+
 class TelaCliente extends StatefulWidget {
   @override
   _TelaClienteListState createState() => _TelaClienteListState();
 }
 
 class _TelaClienteListState extends State<TelaCliente> {
-  final ClientesDao _dao = ClientesDao();
+
 
   @override
   Widget build(BuildContext context) {
+    final ClientesDao _dao = ClientesDao();
     return Scaffold(
       appBar: AppBar(
         title: Text('Clientes'),
@@ -75,6 +78,7 @@ class _TelaClienteListState extends State<TelaCliente> {
 class _ClientesItem extends StatefulWidget {
   final Clientes clientes;
 
+
   const _ClientesItem({Key key, this.clientes}) : super(key: key);
 
   @override
@@ -85,6 +89,7 @@ class __ClientesItemState extends State<_ClientesItem> {
   @override
   Widget build(BuildContext context) {
     final ClientesDao _dao = ClientesDao();
+
     // TODO: implement build
     return ExpansionTile(
       title: Text(
@@ -112,7 +117,7 @@ class __ClientesItemState extends State<_ClientesItem> {
                       'Estado: ${widget.clientes.estado}'),
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     RaisedButton(
@@ -133,8 +138,7 @@ class __ClientesItemState extends State<_ClientesItem> {
 
                           final Clientes newClientes = Clientes(id, name, cpf,
                               datanascimento, telefone, rua, cidade, estado);
-                          _dao
-                              .deleteCustomer(id)
+                          _dao.deleteCustomer(id)
                               .then((id) => Navigator.pop(context));
 
                           print(newClientes);
@@ -149,28 +153,6 @@ class __ClientesItemState extends State<_ClientesItem> {
                             )
                           ],
                         )
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 70),
-                      child: RaisedButton(
-                          color: Colors.pink,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                          ),
-                          onPressed: () {
-
-                          },
-                          child: Row(
-                            children: <Widget>[
-                              Text(
-                                "Atualizar Dados",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          )
-                      ),
                     ),
                   ],
                 )

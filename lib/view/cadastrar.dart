@@ -27,6 +27,7 @@ class _ClientesFormState extends State<Cadastrar> {
   var cpfFormated = new MaskedTextController(mask: '000.000.000-00');
   final ClientesDao _dao = ClientesDao();
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,8 +37,10 @@ class _ClientesFormState extends State<Cadastrar> {
         ),
 
         body: SafeArea(
+
           child: Padding(
             padding: const EdgeInsets.all(16.0),
+
             child: ListView(
               shrinkWrap: true,
               children: <Widget>[
@@ -48,6 +51,7 @@ class _ClientesFormState extends State<Cadastrar> {
                     style: style,
                   ),
                 ),
+
                 Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
                   child: TextFormField(
@@ -60,8 +64,11 @@ class _ClientesFormState extends State<Cadastrar> {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular((80))),
                     ),
+
                   ),
+
                 ),
+
                 Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
                   child: TextField(
@@ -75,8 +82,10 @@ class _ClientesFormState extends State<Cadastrar> {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular((80))),
                     ),
+
                   ),
                 ),
+
                 Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
                   child: OutlineButton(
@@ -132,6 +141,7 @@ class _ClientesFormState extends State<Cadastrar> {
                     ),
                   ),
                 ),
+
                 Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
                   child: Text(
@@ -183,25 +193,35 @@ class _ClientesFormState extends State<Cadastrar> {
                 ),
               ],
             ),
+
           ),
         ),
 
         floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.pink,
-        onPressed: ( ){
-      final String name = _nomeController.text;
-      final String cpf = cpfFormated.text;
-      final String datanascimento = _datanascimentoController.text;
-      final String telefone = teleFormated.text;
-      final String rua = _ruaController.text;
-      final String cidade = _cidadeController.text;
-      final String estado = __estadoController.text;
+        onPressed: ( ) {
+          if (_nomeController != null) {
+            final String name = _nomeController.text;
+            final String cpf = cpfFormated.text;
+            final String datanascimento = _datanascimentoController.text;
+            final String telefone = teleFormated.text;
+            final String rua = _ruaController.text;
+            final String cidade = _cidadeController.text;
+            final String estado = __estadoController.text;
 
-      final Clientes newClientes = Clientes(0, name, cpf,
-          datanascimento, telefone, rua, cidade, estado);
-      _dao.save(newClientes).then((id) => Navigator.pop(context));
-    },
-
+            final Clientes newClientes = Clientes(
+                0,
+                name,
+                cpf,
+                datanascimento,
+                telefone,
+                rua,
+                cidade,
+                estado);
+            _dao.save(newClientes).then((id) => Navigator.pop(context));
+          }
+          return null;
+        },
     child: Icon(Icons.save),
 
     ),

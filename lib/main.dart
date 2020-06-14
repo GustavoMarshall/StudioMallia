@@ -152,10 +152,8 @@ class _WidgetLoginState extends State<WidgetLogin> {
                                       MaterialPageRoute(
                                           builder: (BuildContext context) =>
                                               menuprincipal()));
-                                }
-                                else if(_formKey.currentState.validate()){
-
-
+                                }else {
+                                             showAlertDialog(context);
                                 }
                               },
                               child: Text(
@@ -176,6 +174,25 @@ class _WidgetLoginState extends State<WidgetLogin> {
       ),
     ));
   }
+}
+showAlertDialog(BuildContext context) {
+
+
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("ERRO!"),
+    content: Text("Usuário ou senha incorreta!"),
+
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }
 
 
