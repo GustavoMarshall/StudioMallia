@@ -26,7 +26,8 @@ class menuprincipal extends StatelessWidget {
                 icon: Icon(Icons.exit_to_app),
                 color: Color.fromRGBO(222, 72, 111, 1),
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+                      builder: (BuildContext context) => MyApp()));
                 },
               ),
             ],

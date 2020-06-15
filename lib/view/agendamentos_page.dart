@@ -143,13 +143,14 @@ class __AgendaItemState extends State<_AgendaItem> {
   }
   final AgendamentosDao _dao = AgendamentosDao();
   showAlertDialog2(BuildContext context) {
-    Widget cancelaButton = FlatButton(
-      child: Text("Cancelar"),
-      onPressed:  () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Consultar()));
-      },
-    );
+
+//    Widget cancelaButton = FlatButton(
+//      child: Text("Cancelar"),
+//      onPressed:  () {
+//        Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+//            builder: (BuildContext context) => TelaCliente()));
+//      },
+//    );
     Widget continuaButton = FlatButton(
       child: Text("Finalizar"),
       onPressed:  () {
@@ -161,23 +162,26 @@ class __AgendaItemState extends State<_AgendaItem> {
 
         final Agendamentos newAgendamento =
         Agendamentos(id, cliente, data, horario, servico);
-        _dao.delete(id).then((id) => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => menuprincipal())));
+        _dao.delete(id).then((id) => Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+            builder: (BuildContext context) => menuprincipal())));
 
         print(newAgendamento);
+
       },
+
     );
     //configura o AlertDialog
     AlertDialog alert = AlertDialog(
+
       title: Text("Atenção!"),
       content: Text("Deseja finalizar este atendimento ?"),
       actions: [
-        cancelaButton,
         continuaButton,
       ],
     );
     //exibe o diálogo
     showDialog(
+
       context: context,
       builder: (BuildContext context) {
         return alert;

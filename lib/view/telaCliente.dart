@@ -151,13 +151,14 @@ class __ClientesItemState extends State<_ClientesItem> {
   }
   final ClientesDao _dao = ClientesDao();
   showAlertDialog2(BuildContext context) {
-    Widget cancelaButton = FlatButton(
-      child: Text("Cancelar"),
-      onPressed:  () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => TelaCliente()));
-      },
-    );
+
+//    Widget cancelaButton = FlatButton(
+//      child: Text("Cancelar"),
+//      onPressed:  () {
+//        Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+//            builder: (BuildContext context) => TelaCliente()));
+//      },
+//    );
     Widget continuaButton = FlatButton(
       child: Text("Excluir"),
       onPressed:  () {
@@ -174,22 +175,25 @@ class __ClientesItemState extends State<_ClientesItem> {
         final Clientes newClientes = Clientes(id, name, cpf,
             datanascimento, telefone, rua, cidade, estado);
         _dao.deleteCustomer(id)
-            .then((id) => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => menuprincipal())));
+            .then((id) => Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+          builder: (BuildContext context) => menuprincipal())));
         print(newClientes);
+
       },
+
     );
     //configura o AlertDialog
     AlertDialog alert = AlertDialog(
+
       title: Text("Atenção!"),
       content: Text("Deseja excluir este cliente ?"),
       actions: [
-        cancelaButton,
         continuaButton,
       ],
     );
     //exibe o diálogo
     showDialog(
+
       context: context,
       builder: (BuildContext context) {
         return alert;
